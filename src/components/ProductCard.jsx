@@ -1,13 +1,17 @@
 import { useState } from "react";
+import { useCart } from "../context/CartContext";
+
 
 function ProductCard({ product }) {
     const [expanded, setExpanded] = useState(false);
+    const { addToCart } = useCart();
 
     const maxLength = 125;
     const isLongDescription = product.description.length > maxLength;
     const displayDescription = expanded || !isLongDescription 
         ? product.description 
         : `${product.description.substring(0, maxLength)}...`;
+
     return (
         <div className="rounded-xl p-4 bg-gray-100 shadow-sm w-full h-auto flex flex-col hover:shadow-lg">
             {/* Image container with fixed height */}
@@ -41,7 +45,9 @@ function ProductCard({ product }) {
             {/* Price and button at bottom */}
             <div className="mt-auto">
                 <p className="text-lg font-semibold mb-2">${product.price}</p>
-                <button className="w-full bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white py-2 px-4 rounded">
+                <button 
+                    onClick={() => addToCart(product)}
+                    className="w-full bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white py-2 px-4 rounded">
                     Add to Cart
                 </button>
             </div>

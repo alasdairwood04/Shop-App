@@ -1,7 +1,6 @@
 // import { useState } from 'react'
 import './styles/index.css'
 import { Outlet } from 'react-router-dom'
-import CartProvider from './context/CartContext.jsx'
 
 // components
 import NavBar from "./components/NavBar"
@@ -17,10 +16,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <CartProvider>
         <NavBar />
         <Outlet />
-      </CartProvider>
     </div>
   )
 }
