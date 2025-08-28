@@ -190,7 +190,7 @@ export default function Home() {
                         <input 
                             type="email" 
                             placeholder="Enter your email" 
-                            className="px-4 py-3 rounded-lg flex-grow text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="px-4 py-3 rounded-lg flex-grow text-gray-900 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                         <button 
                             type="submit"
