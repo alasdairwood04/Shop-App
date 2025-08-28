@@ -2,7 +2,7 @@ import { useCart } from '../context/CartContext.jsx';
 import { Link } from 'react-router-dom';
 
 export default function Cart() {
-    const { cartItems, removeFromCart } = useCart();
+    const { cartItems, removeFromCart, updateQuantity } = useCart();
     
     // Calculate cart total
     const cartTotal = cartItems.reduce((total, item) => 
@@ -58,11 +58,27 @@ export default function Cart() {
                                 </div>
                             </div>
                             
-                            {/* Quantity */}
-                            <div className="w-24 text-center">
-                                <span className="inline-flex items-center justify-center h-8 w-8 border border-gray-300 rounded-full bg-white text-sm">
-                                    {item.quantity}
-                                </span>
+                            {/* Quantity controls - UPDATED */}
+                            <div className="w-24 flex items-center justify-center">
+                                <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
+                                    <button 
+                                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                        className="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors"
+                                        aria-label="Decrease quantity"
+                                    >
+                                        -
+                                    </button>
+                                    <span className="px-3 py-1 text-center min-w-[30px]">
+                                        {item.quantity}
+                                    </span>
+                                    <button 
+                                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                        className="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors"
+                                        aria-label="Increase quantity"
+                                    >
+                                        +
+                                    </button>
+                                </div>
                             </div>
                             
                             {/* Total price */}

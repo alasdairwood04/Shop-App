@@ -1,4 +1,3 @@
-// context/CartContext.jsx
 import { createContext, useState, useContext } from "react";
 
 const CartContext = createContext();
@@ -27,8 +26,27 @@ export function CartProvider({ children }) {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   }
 
+  function updateQuantity(id, newQuantity) {
+    if (newQuantity < 1) {
+      // If quantity is less than 1, remove the item
+      removeFromCart(id);
+      return;
+    }
+
+    setCartItems((prev) => 
+      prev.map((item) => 
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  }
+
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ 
+      cartItems, 
+      addToCart, 
+      removeFromCart,
+      updateQuantity 
+    }}>
       {children}
     </CartContext.Provider>
   );
