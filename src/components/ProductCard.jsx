@@ -5,12 +5,25 @@ import { useCart } from "../context/CartContext";
 function ProductCard({ product }) {
     const [expanded, setExpanded] = useState(false);
     const { addToCart } = useCart();
+   const [justAdded, setJustAdded] = useState(false);
+
 
     const maxLength = 125;
     const isLongDescription = product.description.length > maxLength;
     const displayDescription = expanded || !isLongDescription 
         ? product.description 
         : `${product.description.substring(0, maxLength)}...`;
+
+        
+    const handleAddToCart = () => {
+        addToCart(product);
+        setJustAdded(true);
+        
+        // Reset button after 1.5 seconds
+        setTimeout(() => {
+            setJustAdded(false);
+        }, 1500);
+    };
 
     return (
         <div className="rounded-xl p-4 bg-gray-100 shadow-sm w-full h-auto flex flex-col hover:shadow-lg">
@@ -46,9 +59,14 @@ function ProductCard({ product }) {
             <div className="mt-auto">
                 <p className="text-lg font-semibold mb-2">${product.price}</p>
                 <button 
-                    onClick={() => addToCart(product)}
-                    className="w-full bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white py-2 px-4 rounded">
-                    Add to Cart
+                    onClick={handleAddToCart}
+                    className={`w-full py-2 px-4 rounded transition-colors duration-300 ${
+                        justAdded 
+                            ? 'bg-green-500 hover:bg-green-600 active:bg-green-700' 
+                            : 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700'
+                    } text-white`}
+                >
+                    {justAdded ? 'Added to Cart' : 'Add to Cart'}
                 </button>
             </div>
         </div>
