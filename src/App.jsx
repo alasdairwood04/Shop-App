@@ -5,12 +5,6 @@ import { Outlet } from 'react-router-dom'
 // components
 import NavBar from "./components/NavBar"
 
-// pages
-import Home from "./pages/Home"
-import Shop from "./pages/Shop"
-import Cart from "./pages/Cart"
-
-
 function App() {
   // const [count, setCount] = useState(0)
 
